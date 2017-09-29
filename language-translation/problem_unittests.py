@@ -187,7 +187,8 @@ def test_decoding_layer(decoding_layer):
                                                    embedding_size)
 
 
-
+        print(train_decoder_output.rnn_output.get_shape())
+        print([batch_size, None, vocab_size])
         assert isinstance(train_decoder_output, tf.contrib.seq2seq.BasicDecoderOutput),\
             'Found wrong type: {}'.format(type(train_decoder_output))
         assert isinstance(infer_logits_output, tf.contrib.seq2seq.BasicDecoderOutput),\
@@ -340,7 +341,7 @@ def test_decoding_layer_train(decoding_layer_train):
                                         max_target_sequence_length,
                                         output_layer,
                                         keep_prob)
-
+            
             # encoder_state, dec_cell, dec_embed_input, sequence_length,
             #                      decoding_scope, output_fn, keep_prob)
 
@@ -350,7 +351,7 @@ def test_decoding_layer_train(decoding_layer_train):
 
             assert train_decoder_output.rnn_output.get_shape().as_list() == [batch_size, None, vocab_size], \
                 'Wrong shape returned.  Found {}'.format(train_decoder_output.rnn_output.get_shape())
-
+            
     _print_success_message()
 
 
